@@ -1,4 +1,4 @@
--- Show a custom startup screen with the Neovim logo, version, and charity section
+-- Show a custom startup screen with the NVIM wordmark and version
 vim.opt.shortmess:append("I")
 require("welcome")
 

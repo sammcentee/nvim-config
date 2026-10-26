@@ -14,21 +14,14 @@ api.nvim_create_autocmd("VimEnter", {
 
     local version = vim.version()
     local lines = {
-      "██████╗     ████╗",
-      "███████╗    ████║",
-      "████╔███╗   ████║",
-      "████║╚███╗  ████║",
-      "████║ ╚███╗ ████║",
-      "████║  ╚████████║",
-      "████║   ╚███████║",
-      "╚═══╝    ╚══════╝",
+      "███╗   ██╗ ██╗   ██╗ ██╗ ███╗   ███╗",
+      "████╗  ██║ ██║   ██║ ██║ ████╗ ████║",
+      "██╔██╗ ██║ ██║   ██║ ██║ ██╔████╔██║",
+      "██║╚██╗██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+      "██║ ╚████║  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+      "╚═╝  ╚═══╝   ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
       "",
-      "Neovim",
       "v" .. version.major .. "." .. version.minor .. "." .. version.patch,
-      "",
-      "",
-      "Help poor children in Uganda!",
-      "type  :help Kuwasha<Enter>",
     }
     if vim.o.columns < 50 or vim.o.lines < #lines + 5 then
       return
@@ -52,23 +45,12 @@ api.nvim_create_autocmd("VimEnter", {
     vim.wo[window].winhighlight = "NormalFloat:Normal,EndOfBuffer:Normal"
 
     api.nvim_set_hl(0, "WelcomeLogo", { fg = "#7ABF60", bold = true })
-    api.nvim_set_hl(0, "WelcomeTitle", { fg = "#6B8BB5", bold = true })
     api.nvim_set_hl(0, "WelcomeVersion", { fg = "#808080" })
     local namespace = api.nvim_create_namespace("Welcome")
     for i, line in ipairs(lines) do
-      local highlight = i <= 8 and "WelcomeLogo" or i == 10 and "WelcomeTitle"
-        or i == 11 and "WelcomeVersion"
+      local highlight = i <= 6 and "WelcomeLogo" or i == 8 and "WelcomeVersion"
       if highlight then
         api.nvim_buf_set_extmark(buffer, namespace, i - 1, 0, { end_col = #line, hl_group = highlight })
-      end
-      local first, last = line:find(":.-<Enter>")
-      if first then
-        api.nvim_buf_set_extmark(buffer, namespace, i - 1, first - 1,
-          { end_col = first, hl_group = "SpecialKey" })
-        api.nvim_buf_set_extmark(buffer, namespace, i - 1, first,
-          { end_col = last - #"<Enter>", hl_group = "Identifier" })
-        api.nvim_buf_set_extmark(buffer, namespace, i - 1, last - #"<Enter>",
-          { end_col = last, hl_group = "SpecialKey" })
       end
     end
 
