@@ -1,5 +1,5 @@
 local api = vim.api
-local group = api.nvim_create_augroup("WelcomeWithoutCharity", { clear = true })
+local group = api.nvim_create_augroup("Welcome", { clear = true })
 
 api.nvim_create_autocmd("VimEnter", {
   group = group,
@@ -14,22 +14,21 @@ api.nvim_create_autocmd("VimEnter", {
 
     local version = vim.version()
     local lines = {
-      "│ ╲ ││",
-      "││╲╲││",
-      "││ ╲ │",
+      "██████╗     ████╗",
+      "███████╗    ████║",
+      "████╔███╗   ████║",
+      "████║╚███╗  ████║",
+      "████║ ╚███╗ ████║",
+      "████║  ╚████████║",
+      "████║   ╚███████║",
+      "╚═══╝    ╚══════╝",
       "",
-      "NVIM v" .. version.major .. "." .. version.minor .. "." .. version.patch,
-      string.rep("─", 44),
-      "Nvim is open source and freely distributable",
-      "https://neovim.io/#chat",
-      string.rep("─", 44),
-      "type  :help nvim<Enter>     if you are new! ",
-      "type  :checkhealth<Enter>   to optimize Nvim",
-      "type  :q<Enter>             to exit         ",
-      "type  :help<Enter>          for help        ",
-      string.rep("─", 44),
-      string.format("type  :help news<Enter>     for v%d.%d notes ", version.major, version.minor),
-      string.rep("─", 44),
+      "Neovim",
+      "v" .. version.major .. "." .. version.minor .. "." .. version.patch,
+      "",
+      "",
+      "Help poor children in Uganda!",
+      "type  :help Kuwasha<Enter>",
     }
     if vim.o.columns < 50 or vim.o.lines < #lines + 5 then
       return
@@ -52,17 +51,15 @@ api.nvim_create_autocmd("VimEnter", {
     })
     vim.wo[window].winhighlight = "NormalFloat:Normal,EndOfBuffer:Normal"
 
-    local namespace = api.nvim_create_namespace("WelcomeWithoutCharity")
+    api.nvim_set_hl(0, "WelcomeLogo", { fg = "#7ABF60", bold = true })
+    api.nvim_set_hl(0, "WelcomeTitle", { fg = "#6B8BB5", bold = true })
+    api.nvim_set_hl(0, "WelcomeVersion", { fg = "#808080" })
+    local namespace = api.nvim_create_namespace("Welcome")
     for i, line in ipairs(lines) do
-      local highlight = i <= 3 and "Special" or i == 5 and "String"
-        or line:find("─", 1, true) and "NonText"
+      local highlight = i <= 8 and "WelcomeLogo" or i == 10 and "WelcomeTitle"
+        or i == 11 and "WelcomeVersion"
       if highlight then
         api.nvim_buf_set_extmark(buffer, namespace, i - 1, 0, { end_col = #line, hl_group = highlight })
-      end
-      if i <= 3 then
-        local diagonal = line:find("╲", 1, true)
-        api.nvim_buf_set_extmark(buffer, namespace, i - 1, diagonal - 1,
-          { end_col = #line, hl_group = "String", priority = 101 })
       end
       local first, last = line:find(":.-<Enter>")
       if first then

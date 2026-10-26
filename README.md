@@ -15,14 +15,14 @@ Neovim configuration for Arch Linux in WSL2.
 
 ## Welcome screen
 
-`init.lua` hides the default intro screen of Neovim (`shortmess+=I`). Then `lua/welcome.lua` shows a new screen. The new screen has the same text as the default screen, but without the charity section (`:help iccf`).
+`lua/welcome.lua` replaces the default intro with a large green N, the Neovim name, and a muted version line. The version comes from the installed Neovim. The charity section stays below the logo, with `:help Kuwasha` for details.
 
 The new screen shows only when Neovim starts with an empty buffer that has no name. The screen does not show in these conditions:
 
 - You start Neovim with a file name, for example `nvim notes.md`.
 - Neovim runs in VS Code (the vscode-neovim extension).
 - Neovim runs without a user interface (headless).
-- The terminal is less than 50 columns wide or less than 21 lines high.
+- The terminal is less than 50 columns wide or less than 20 lines high.
 
 The screen closes when you push a key. The screen also closes when you go to a different buffer or when the size of the terminal changes.
 

@@ -1,4 +1,4 @@
--- Replace the startup welcome screen with the same text minus the charity section
+-- Show a custom startup screen with the Neovim logo, version, and charity section
 vim.opt.shortmess:append("I")
 require("welcome")
 
