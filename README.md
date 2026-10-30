@@ -9,7 +9,7 @@ Neovim configuration for Arch Linux in WSL2.
 - Neovim shows line numbers and relative line numbers.
 - Yank, delete, and put use the system clipboard (`clipboard=unnamedplus`).
 - Neovim uses full RGB colors in the terminal (`termguicolors`).
-- The background is black (`#000000`). The text colors do not change.
+- Neovim does not paint a background color (`Normal guibg=NONE`). The background of the terminal shows instead, so Neovim matches VS Code. The text colors do not change.
 - The number of the current line is bold yellow (`#FFFF00`). This yellow is the same as the color of the VS Code cursor.
 - The relative numbers above the cursor are muted blue. The relative numbers below the cursor are muted green.
 

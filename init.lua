@@ -14,8 +14,8 @@ vim.opt.clipboard = "unnamedplus"
 -- Use full RGB colours in the terminal
 vim.opt.termguicolors = true
 
--- Use a pure black background and keep the existing text colours
-vim.cmd("highlight Normal guibg=#000000")
+-- Use the terminal background colour (so Neovim matches VS Code) and keep the existing text colours
+vim.cmd("highlight Normal guibg=NONE")
 
 -- Show the current line number in yellow (same yellow as the VS Code cursor)
 vim.opt.cursorline = true
